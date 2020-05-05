@@ -456,7 +456,66 @@
                                         <td class="center">05.05.2020 15:52</td>
                                         <td>05.05.2020 15:52 192.167.13.12</td>
                                         <td>Active</td>
-                                        <td>"05.05.2020 15:52 Signed in"</td>
+                                        <td>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Actions
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Chat</a>
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Change Password</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="gradeX">
+                                        <td>2</td>
+                                        <td>Jane Doe</td>
+                                        <td>another@example.com</td>
+                                        <td class="center">Admin</td>
+                                        <td class="center">09.04.2020 15:52</td>
+                                        <td>27.04.2020 12:40 192.167.17.10</td>
+                                        <td>Active</td>
+                                        <td>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Actions
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Chat</a>
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Change Password</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="gradeX">
+                                        <td>3</td>
+                                        <td>Some User</td>
+                                        <td>some_user@example.com</td>
+                                        <td class="center">User</td>
+                                        <td class="center">03.02.2020 16:50</td>
+                                        <td>03.02.2020 16:50 192.167.11.07</td>
+                                        <td>Active</td>
+                                        <td>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Actions
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Chat</a>
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Change Password</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tfoot>
                                     <tr>
@@ -513,11 +572,23 @@
     <script>
         $(document).ready(function(){
             $('.dataTables-example').DataTable({
+
+                columnDefs: [
+                    { "orderable": false, "targets": 7 },
+                    { "searchable": false, "targets": [0, 4, 5, 7] }
+                ],
+
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    { extend: 'copy'},
+                    {
+                        text: 'Create User',
+                        action: function ( e, dt, node, config ) {
+                            console.log('creating user');
+                        }
+                    },
+                    {extend: 'copy'},
                     {extend: 'csv'},
                     {extend: 'excel', title: 'ExampleFile'},
                     {extend: 'pdf', title: 'ExampleFile'},
@@ -531,12 +602,20 @@
                                 .addClass('compact')
                                 .css('font-size', 'inherit');
                         }
-                    }
+                    },
                 ]
 
+            }).on('order', function () {
+                console.log('ordering users');
             });
 
         });
+
+        // $(document).ready(function () {
+        //    $('.dataTables-example').on('search', function () {
+        //        console.log('searching users');
+        //    });
+        // });
 
     </script>
 
