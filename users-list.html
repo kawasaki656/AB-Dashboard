@@ -514,16 +514,16 @@
             let userStatus = ['Active', 'Banned'];
 
             for (let i = 1; i < 100; i++) {
-                data.push( [
-                    i,
-                    faker.name.findName(),
-                    faker.internet.email(),
-                    faker.random.arrayElement(userType),
-                    faker.date.past(),
-                    faker.date.past() + ' ' + faker.internet.ip(),
-                    faker.random.arrayElement(userStatus),
-                    actions
-                ]);
+                data.push({
+                    'Id': i,
+                    'Full Name': faker.name.findName(),
+                    'Email': faker.internet.email(),
+                    'Role': faker.random.arrayElement(userType),
+                    'Added At': faker.date.past(),
+                    'Last Active At And IP': faker.date.past() + ' ' + faker.internet.ip(),
+                    'Status': faker.random.arrayElement(userStatus),
+                    'Actions': actions
+                });
             }
 
             $('.dataTables-example').DataTable({
@@ -559,7 +559,17 @@
                         }
                     },
                 ],
-                data: data
+                data: data,
+                columns: [
+                    {data: 'Id'},
+                    {data: 'Full Name'},
+                    {data: 'Email'},
+                    {data: 'Role'},
+                    {data: 'Added At'},
+                    {data: 'Last Active At And IP'},
+                    {data: 'Status'},
+                    {data: 'Actions'}
+                ]
 
             }).on('order', function () {
                 console.log('ordering users');
