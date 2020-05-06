@@ -499,15 +499,15 @@
                             <div class="form-group">
                                 <label>Role</label>
                                 <select class="form-control" name="role">
-                                    <option value="user">User</option>
-                                    <option value="admin">Admin</option>
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control" name="status">
-                                    <option value="active">Active</option>
-                                    <option value="banned">Banned</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Banned">Banned</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -551,18 +551,20 @@
     <script>
         $(document).ready(function(){
 
-            let actions = `<div class="dropdown show">
+            let actions = function(i) {
+                return `<div class="dropdown show">
                                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Actions
                                                 </a>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="#">Chat</a>
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Change Password</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item user-chat" href="#">Chat</a>
+                                                    <a class="dropdown-item user-edit" href="#">Edit</a>
+                                                    <a class="dropdown-item user-change-password" href="#">Change Password</a>
+                                                    <a class="dropdown-item user-delete" href="#">Delete</a>
                                                 </div>
                                             </div>`;
+            }
 
             let data = [];
             let userType = ['User', 'Admin'];
@@ -577,7 +579,7 @@
                     'Added At': faker.date.past(),
                     'Last Active At And IP': faker.date.past() + ' ' + faker.internet.ip(),
                     'Status': faker.random.arrayElement(userStatus),
-                    'Actions': actions
+                    'Actions': actions(i)
                 });
             }
 
@@ -631,6 +633,9 @@
                 console.log('ordering users');
             });
 
+
+            let lastId = table.rows()[0].length;
+
             $('#add-user').on('click', (e) => {
                 e.preventDefault();
                 $('#createUserModal').modal('hide');
@@ -640,10 +645,9 @@
                     return obj;
                 }, {});
 
-
                 table.rows.add([
                     {
-                        'Id': table.rows()[0].length + 1,
+                        'Id': ++lastId,
                         'Full Name': data.name + ' ' + data.second_name + ' ' + data.patronymic,
                         'Email': data.email,
                         'Role': data.role,
@@ -653,6 +657,11 @@
                         'Actions': actions
                     }
                 ]).draw();
+            });
+
+            table.on('click', '.user-delete', (e) => {
+                e.preventDefault();
+                table.row($(e.target).parents('tr')).remove().draw();
             });
 
         });
