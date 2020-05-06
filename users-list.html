@@ -479,14 +479,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="user-form">
                             <div class="form-group">
                                 <label class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="name">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Second Name</label>
-                                <input type="text" class="form-control" name="second-name">
+                                <input type="text" class="form-control" name="second_name">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Patronymic</label>
@@ -518,7 +518,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary" id="add-user">Save</button>
                     </div>
                 </div>
             </div>
@@ -581,7 +581,7 @@
                 });
             }
 
-            $('.dataTables-example').DataTable({
+            let table = $('.dataTables-example').DataTable({
 
                 columnDefs: [
                     { "orderable": false, "targets": 7 },
@@ -629,6 +629,30 @@
 
             }).on('order', function () {
                 console.log('ordering users');
+            });
+
+            $('#add-user').on('click', (e) => {
+                e.preventDefault();
+                $('#createUserModal').modal('hide');
+
+                let data = $('#user-form').serializeArray().reduce(function(obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+
+
+                table.rows.add([
+                    {
+                        'Id': table.rows()[0].length + 1,
+                        'Full Name': data.name + ' ' + data.second_name + ' ' + data.patronymic,
+                        'Email': data.email,
+                        'Role': data.role,
+                        'Added At': null,
+                        'Last Active At And IP': null,
+                        'Status': data.status,
+                        'Actions': actions
+                    }
+                ]).draw();
             });
 
         });
