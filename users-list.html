@@ -270,7 +270,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="user-form">
+                        <form id="user-form" data-action="create">
                             <div class="form-group">
                                 <label class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="name">
@@ -411,30 +411,57 @@
 
 
             let lastId = table.rows()[0].length;
+            let currentRow = null;
 
-            $('#add-user').on('click', (e) => {
-                e.preventDefault();
-                $('#createUserModal').modal('hide');
-
-                let data = $('#user-form').serializeArray().reduce(function(obj, item) {
+            function postForm(row = null)
+            {
+                let formData = $('#user-form').serializeArray().reduce(function(obj, item) {
                     obj[item.name] = item.value;
                     return obj;
                 }, {});
 
-                table.rows.add([
-                    {
-                        'Id': ++lastId,
-                        'Full Name': data.name + ' ' + data.second_name + ' ' + data.patronymic,
-                        'Email': data.email,
-                        'Role': data.role,
-                        'Added At': null,
-                        'Last Active At And IP': null,
-                        'Status': data.status,
-                        'Actions': actions
-                    }
-                ]).draw();
+                let data = [{
+                    'Id': row ? row.data().Id : ++lastId,
+                    'Full Name': formData.name + ' ' + formData.second_name + ' ' + formData.patronymic,
+                    'Email': formData.email,
+                    'Role': formData.role,
+                    'Added At': null,
+                    'Last Active At And IP': null,
+                    'Status': formData.status,
+                    'Actions': actions
+                }];
+
+                if (row) {
+                    row.data(data[0]).draw();
+                } else {
+                    table.rows.add(data).draw();
+                }
 
                 $('#user-form').find("input[type=text], input[type=email], input[type=password], textarea").val('');
+            }
+
+            function storeForm(row = null)
+            {
+                $('#createUserModal').modal('hide');
+
+                if (row) {
+                    postForm(row);
+                } else {
+                    postForm();
+                }
+            }
+
+
+            $('#add-user').on('click', (e) => {
+                e.preventDefault();
+
+                let action = $('#add-user').data('action');
+
+                if (action === 'create') {
+                    storeForm();
+                } else {
+                    storeForm(currentRow);
+                }
             });
 
             table.on('click', '.user-delete', (e) => {
@@ -456,6 +483,7 @@
                 $('#user-form').find("select[name=role]").val(row.data()['Role']);
                 $('#user-form').find("select[name=status]").val(row.data()['Status']);
 
+                currentRow = row;
             });
 
         });
