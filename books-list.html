@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Users</title>
+    <title>INSPINIA | Books</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -182,7 +182,7 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Users</h2>
+                <h2>Books</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Home</a>
@@ -191,7 +191,7 @@
                         <a href="#">Options</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        <strong>Users</strong>
+                        <strong>Books</strong>
                     </li>
                 </ol>
             </div>
@@ -206,7 +206,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Users</h5>
+                            <h5>Books</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -214,7 +214,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <i class="fa fa-wrench"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-user">
+                                <ul class="dropdown-menu dropdown-book">
                                     <li><a href="#" class="dropdown-item">Config option 1</a>
                                     </li>
                                     <li><a href="#" class="dropdown-item">Config option 2</a>
@@ -232,12 +232,15 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Added At</th>
-                                        <th>Last Active At And IP</th>
+                                        <th>Book Id</th>
+                                        <th>Name</th>
+                                        <th>Author</th>
+                                        <th>Serial</th>
                                         <th>Status</th>
+                                        <th>Language</th>
+                                        <th>Duration</th>
+                                        <th>Added At</th>
+                                        <th>Creator</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -312,7 +315,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="add-user">Save</button>
+                        <button type="button" class="btn btn-primary" id="add-book">Save</button>
                     </div>
                 </div>
             </div>
@@ -363,190 +366,194 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="update-user">Save</button>
+                        <button type="button" class="btn btn-primary" id="update-book">Save</button>
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
 </div>
-</div>
 
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
 
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <script src="js/plugins/dataTables/datatables.min.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+<script src="js/plugins/dataTables/datatables.min.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- only for creating fake data -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+<!-- only for creating fake data -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
 
-    <!-- Page-Level Scripts -->
-    <script>
-        $(document).ready(function(){
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function(){
 
-            let actions = function() {
-                return `<div class="dropdown show">
+        let actions = function() {
+            return `<div class="dropdown show">
                                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Actions
                                                 </a>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item user-chat" href="#">Chat</a>
-                                                    <a class="dropdown-item user-edit" href="#">Edit</a>
-                                                    <a class="dropdown-item user-change-password" href="#">Change Password</a>
-                                                    <a class="dropdown-item user-delete" href="#">Delete</a>
+                                                    <a class="dropdown-item book-edit" href="#">Edit</a>
+                                                    <a class="dropdown-item book-delete" href="#">Delete</a>
                                                 </div>
                                             </div>`;
-            };
+        };
 
-            let data = [];
-            let userType = ['User', 'Admin'];
-            let userStatus = ['Active', 'Banned'];
+        let data = [];
+        let bookLanguage = ['en', 'jp', 'ru', 'de'];
+        let bookStatuses = ['In Stock', 'Off Stock'];
 
-            for (let i = 1; i < 100; i++) {
-                data.push({
-                    'Id': i,
-                    'Full Name': faker.name.findName(),
-                    'Email': faker.internet.email(),
-                    'Role': faker.random.arrayElement(userType),
-                    'Added At': faker.date.past(),
-                    'Last Active At And IP': faker.date.past() + ' ' + faker.internet.ip(),
-                    'Status': faker.random.arrayElement(userStatus),
-                    'Actions': actions()
-                });
-            }
-
-            let table = $('.dataTables-example').DataTable({
-
-                columnDefs: [
-                    { "orderable": false, "targets": 7 },
-                    { "searchable": false, "targets": [0, 4, 5, 7] }
-                ],
-
-                pageLength: 25,
-                responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
-                buttons: [
-                    {
-                        text: 'Create User',
-                        action: function ( e, dt, node, config ) {
-                            console.log('creating user');
-                            $('#createUserModal').modal('toggle');
-                        }
-                    },
-                ],
-                data: data,
-                columns: [
-                    {data: 'Id'},
-                    {data: 'Full Name'},
-                    {data: 'Email'},
-                    {data: 'Role'},
-                    {data: 'Added At'},
-                    {data: 'Last Active At And IP'},
-                    {data: 'Status'},
-                    {data: 'Actions'}
-                ]
-
-            }).on('order', function () {
-                console.log('ordering users');
+        for (let i = 1; i < 100; i++) {
+            data.push({
+                'Id': i,
+                'Book Id': faker.random.number(),
+                'Name': faker.commerce.productName(),
+                'Author': faker.internet.userName(),
+                'Serial': Math.random().toString(20).substr(2, 6),
+                'Status': faker.random.arrayElement(bookStatuses),
+                'Language': faker.random.arrayElement(bookLanguage),
+                'Duration': faker.random.number(40),
+                'Added At': faker.date.past(),
+                'Creator': faker.internet.userName,
+                'Actions': actions()
             });
+        }
 
+        let table = $('.dataTables-example').DataTable({
 
-            let lastId = table.rows()[0].length;
-            let currentRow = null;
+            columnDefs: [
+                { "orderable": false, "targets": 7 },
+                { "searchable": false, "targets": [0, 4, 5, 7] }
+            ],
 
-            function postForm(row = null)
-            {
-                let form = $('#user-form');
-                if (row) {
-                    form = $('#user-form-update');
-                }
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                {
+                    text: 'Create Book',
+                    action: function ( e, dt, node, config ) {
+                        console.log('creating book');
+                        $('#createUserModal').modal('toggle');
+                    }
+                },
+            ],
+            data: data,
+            columns: [
+                {data: 'Id'},
+                {data: 'Book Id'},
+                {data: 'Name'},
+                {data: 'Author'},
+                {data: 'Serial'},
+                {data: 'Status'},
+                {data: 'Language'},
+                {data: 'Duration'},
+                {data: 'Added At'},
+                {data: 'Creator'},
+                {data: 'Actions'}
+            ],
 
-                let formData = form.serializeArray().reduce(function(obj, item) {
-                    obj[item.name] = item.value;
-                    return obj;
-                }, {});
-
-                let data = [{
-                    'Id': row ? row.data().Id : ++lastId,
-                    'Full Name': formData.name + ' ' + formData.second_name + ' ' + formData.patronymic,
-                    'Email': formData.email,
-                    'Role': formData.role,
-                    'Added At': row ? row.data()['Added At'] : null,
-                    'Last Active At And IP': row ? row.data()['Last Active At And IP'] : null,
-                    'Status': formData.status,
-                    'Actions': actions
-                }];
-
-                if (row) {
-                    row.data(data[0]);
-                    $('#updateUserModal').modal('hide');
-                } else {
-                    table.rows.add(data).draw();
-                    $('#createUserModal').modal('hide');
-                }
-
-                form.find("input[type=text], input[type=email], input[type=password], textarea").val('');
-            }
-
-            function storeForm(row = null)
-            {
-                if (row) {
-                    postForm(row);
-                } else {
-                    postForm();
-                }
-            }
-
-
-            $('#add-user').on('click', (e) => {
-                e.preventDefault();
-
-                storeForm();
-            });
-
-            $('#update-user').on('click', (e) => {
-                storeForm(currentRow);
-            });
-
-            table.on('click', '.user-delete', (e) => {
-                e.preventDefault();
-                table.row($(e.target).parents('tr')).remove().draw();
-            });
-
-            table.on('click', '.user-edit', (e) => {
-                e.preventDefault();
-                $('#updateUserModal').modal('show');
-
-                let row = table.row($(e.target).parents('tr'));
-                let fullName = row.data()['Full Name'].split(' ');
-                let updateForm = $('#user-form-update');
-
-                updateForm.find("input[name=name]").val(fullName[0]);
-                updateForm.find("input[name=second_name]").val(fullName[1]);
-                updateForm.find("input[name=patronymic]").val(fullName[2]);
-                updateForm.find("input[name=email]").val(row.data()['Email']);
-                updateForm.find("select[name=role]").val(row.data()['Role']);
-                updateForm.find("select[name=status]").val(row.data()['Status']);
-
-                currentRow = row;
-            });
-
+        }).on('order', function () {
+            console.log('ordering books');
         });
 
-    </script>
+
+        let lastId = table.rows()[0].length;
+        let currentRow = null;
+
+        function postForm(row = null)
+        {
+            let form = $('#user-form');
+            if (row) {
+                form = $('#user-form-update');
+            }
+
+            let formData = form.serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+
+            let data = [{
+                'Id': row ? row.data().Id : ++lastId,
+                'Full Name': formData.name + ' ' + formData.second_name + ' ' + formData.patronymic,
+                'Email': formData.email,
+                'Role': formData.role,
+                'Added At': row ? row.data()['Added At'] : null,
+                'Last Active At And IP': row ? row.data()['Last Active At And IP'] : null,
+                'Status': formData.status,
+                'Actions': actions
+            }];
+
+            if (row) {
+                row.data(data[0]);
+                $('#updateUserModal').modal('hide');
+            } else {
+                table.rows.add(data).draw();
+                $('#createUserModal').modal('hide');
+            }
+
+            form.find("input[type=text], input[type=email], input[type=password], textarea").val('');
+        }
+
+        function storeForm(row = null)
+        {
+            if (row) {
+                postForm(row);
+            } else {
+                postForm();
+            }
+        }
+
+
+        $('#add-book').on('click', (e) => {
+            e.preventDefault();
+
+            storeForm();
+        });
+
+        $('#update-book').on('click', (e) => {
+            storeForm(currentRow);
+        });
+
+        table.on('click', '.book-delete', (e) => {
+            e.preventDefault();
+            table.row($(e.target).parents('tr')).remove().draw();
+        });
+
+        table.on('click', '.book-edit', (e) => {
+            e.preventDefault();
+            $('#updateUserModal').modal('show');
+
+            let row = table.row($(e.target).parents('tr'));
+            let fullName = row.data()['Full Name'].split(' ');
+            let updateForm = $('#user-form-update');
+
+            updateForm.find("input[name=name]").val(fullName[0]);
+            updateForm.find("input[name=second_name]").val(fullName[1]);
+            updateForm.find("input[name=patronymic]").val(fullName[2]);
+            updateForm.find("input[name=email]").val(row.data()['Email']);
+            updateForm.find("select[name=role]").val(row.data()['Role']);
+            updateForm.find("select[name=status]").val(row.data()['Status']);
+
+            currentRow = row;
+        });
+
+    });
+
+</script>
 
 </body>
 </html>
