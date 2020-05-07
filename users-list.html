@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Users</title>
+    <title>INSPINIA | Пользователи</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -45,9 +45,9 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Options</span> <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Настройки</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="users-list.html">Users</a></li>
+                        <li><a href="users-list.html">Пользователи</a></li>
                     </ul>
                 </li>
             </ul>
@@ -62,14 +62,11 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="Введите текст для поиска..." class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -169,7 +166,7 @@
 
                     <li>
                         <a href="login.html">
-                            <i class="fa fa-sign-out"></i> Log out
+                            <i class="fa fa-sign-out"></i> Выход
                         </a>
                     </li>
                 </ul>
@@ -182,13 +179,13 @@
                 <h2>Users</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="index.html">Home</a>
+                        <a href="index.html">Главная</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">Options</a>
+                        <a href="#">Настройки</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        <strong>Users</strong>
+                        <strong>Пользователи</strong>
                     </li>
                 </ol>
             </div>
@@ -203,7 +200,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Users</h5>
+                            <h5>Пользователи</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -229,13 +226,13 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Full Name</th>
+                                        <th>ФИО</th>
                                         <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Added At</th>
-                                        <th>Last Active At And IP</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>Роль</th>
+                                        <th>Дата добавления в систему</th>
+                                        <th>Дата последнего входа и IP</th>
+                                        <th>Статус</th>
+                                        <th>Действия</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -256,7 +253,7 @@
                 10GB of <strong>250GB</strong> Free.
             </div>
             <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2018
+                <strong>Copyright</strong> AB Publishing &copy; 2020
             </div>
         </div>
 
@@ -396,14 +393,14 @@
             let actions = function(i) {
                 return `<div class="dropdown show">
                                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Actions
+                                                    Действия
                                                 </a>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item user-chat" href="#">Chat</a>
-                                                    <a class="dropdown-item user-edit" href="#">Edit</a>
-                                                    <a class="dropdown-item user-change-password" href="#">Change Password</a>
-                                                    <a class="dropdown-item user-delete" href="#">Delete</a>
+                                                    <a class="dropdown-item user-chat" href="#">Начать чат</a>
+                                                    <a class="dropdown-item user-edit" href="#">Редактировать</a>
+                                                    <a class="dropdown-item user-change-password" href="#">Изменить пароль</a>
+                                                    <a class="dropdown-item user-delete" href="#">Удалить</a>
                                                 </div>
                                             </div>`;
             };
@@ -427,6 +424,19 @@
 
             let table = $('.dataTables-example').DataTable({
 
+                language: {
+                    lengthMenu: 'Отображать <select>'+
+                        '<option value="10">10</option>'+
+                        '<option value="25">25</option>'+
+                        '<option value="50">50</option>'+
+                        '<option value="100">100</option>'+
+                        '</select> записей',
+                    search: 'Поиск',
+                    paginate: {
+                        next: 'Далее',
+                        previous: 'Назад',
+                    }
+                },
                 columnDefs: [
                     { "orderable": false, "targets": 7 },
                     { "searchable": false, "targets": [0, 4, 5, 7] }
@@ -437,9 +447,9 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
                     {
-                        text: 'Create User',
+                        text: 'Добавить пользователя',
                         action: function ( e, dt, node, config ) {
-                            console.log('creating user');
+                            console.log('Добавить пользователя');
                             $('#createUserModal').modal('toggle');
                         }
                     },
