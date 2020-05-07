@@ -270,7 +270,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="user-form" data-action="create">
+                        <form id="user-form">
                             <div class="form-group">
                                 <label class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="name">
@@ -310,6 +310,57 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" id="add-user">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="user-form-update">
+                            <div class="form-group">
+                                <label class="col-form-label">Name</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Second Name</label>
+                                <input type="text" class="form-control" name="second_name">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Patronymic</label>
+                                <input type="text" class="form-control" name="patronymic">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Email</label>
+                                <input type="email" class="form-control" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select class="form-control" name="role">
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="status">
+                                    <option value="Active">Active</option>
+                                    <option value="Banned">Banned</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="update-user">Save</button>
                     </div>
                 </div>
             </div>
@@ -390,7 +441,6 @@
                         action: function ( e, dt, node, config ) {
                             console.log('creating user');
                             $('#createUserModal').modal('toggle');
-                            $('#add-user').data('action', 'create');
                         }
                     },
                 ],
@@ -416,7 +466,12 @@
 
             function postForm(row = null)
             {
-                let formData = $('#user-form').serializeArray().reduce(function(obj, item) {
+                let form = $('#user-form');
+                if (row) {
+                    form = $('#user-form-update');
+                }
+
+                let formData = form.serializeArray().reduce(function(obj, item) {
                     obj[item.name] = item.value;
                     return obj;
                 }, {});
@@ -434,17 +489,17 @@
 
                 if (row) {
                     row.data(data[0]);
+                    $('#updateUserModal').modal('hide');
                 } else {
                     table.rows.add(data).draw();
+                    $('#createUserModal').modal('hide');
                 }
 
-                $('#user-form').find("input[type=text], input[type=email], input[type=password], textarea").val('');
+                form.find("input[type=text], input[type=email], input[type=password], textarea").val('');
             }
 
             function storeForm(row = null)
             {
-                $('#createUserModal').modal('hide');
-
                 if (row) {
                     postForm(row);
                 } else {
@@ -456,13 +511,11 @@
             $('#add-user').on('click', (e) => {
                 e.preventDefault();
 
-                let action = $('#add-user').data('action');
+                storeForm();
+            });
 
-                if (action === 'create') {
-                    storeForm();
-                } else {
-                    storeForm(currentRow);
-                }
+            $('#update-user').on('click', (e) => {
+                storeForm(currentRow);
             });
 
             table.on('click', '.user-delete', (e) => {
@@ -472,19 +525,19 @@
 
             table.on('click', '.user-edit', (e) => {
                 e.preventDefault();
-                $('#createUserModal').modal('show');
+                $('#updateUserModal').modal('show');
 
                 let row = table.row($(e.target).parents('tr'));
                 let fullName = row.data()['Full Name'].split(' ');
+                let updateForm = $('#user-form-update');
 
-                $('#user-form').find("input[name=name]").val(fullName[0]);
-                $('#user-form').find("input[name=second_name]").val(fullName[1]);
-                $('#user-form').find("input[name=patronymic]").val(fullName[2]);
-                $('#user-form').find("input[name=email]").val(row.data()['Email']);
-                $('#user-form').find("select[name=role]").val(row.data()['Role']);
-                $('#user-form').find("select[name=status]").val(row.data()['Status']);
+                updateForm.find("input[name=name]").val(fullName[0]);
+                updateForm.find("input[name=second_name]").val(fullName[1]);
+                updateForm.find("input[name=patronymic]").val(fullName[2]);
+                updateForm.find("input[name=email]").val(row.data()['Email']);
+                updateForm.find("select[name=role]").val(row.data()['Role']);
+                updateForm.find("select[name=status]").val(row.data()['Status']);
 
-                $('#add-user').data('action', 'edit');
                 currentRow = row;
             });
 
