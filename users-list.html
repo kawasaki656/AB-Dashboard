@@ -390,6 +390,7 @@
                         action: function ( e, dt, node, config ) {
                             console.log('creating user');
                             $('#createUserModal').modal('toggle');
+                            $('#add-user').data('action', 'create');
                         }
                     },
                 ],
@@ -425,14 +426,14 @@
                     'Full Name': formData.name + ' ' + formData.second_name + ' ' + formData.patronymic,
                     'Email': formData.email,
                     'Role': formData.role,
-                    'Added At': null,
-                    'Last Active At And IP': null,
+                    'Added At': row ? row.data()['Added At'] : null,
+                    'Last Active At And IP': row ? row.data()['Last Active At And IP'] : null,
                     'Status': formData.status,
                     'Actions': actions
                 }];
 
                 if (row) {
-                    row.data(data[0]).draw();
+                    row.data(data[0]);
                 } else {
                     table.rows.add(data).draw();
                 }
@@ -483,6 +484,7 @@
                 $('#user-form').find("select[name=role]").val(row.data()['Role']);
                 $('#user-form').find("select[name=status]").val(row.data()['Status']);
 
+                $('#add-user').data('action', 'edit');
                 currentRow = row;
             });
 
