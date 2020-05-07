@@ -512,7 +512,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Password</label>
-                                <input id="user-password" type="password" class="form-control" name="password">
+                                <input type="password" class="form-control" name="password">
                             </div>
                         </form>
                     </div>
@@ -664,6 +664,22 @@
             table.on('click', '.user-delete', (e) => {
                 e.preventDefault();
                 table.row($(e.target).parents('tr')).remove().draw();
+            });
+
+            table.on('click', '.user-edit', (e) => {
+                e.preventDefault();
+                $('#createUserModal').modal('show');
+
+                let row = table.row($(e.target).parents('tr'));
+                let fullName = row.data()['Full Name'].split(' ');
+
+                $('#user-form').find("input[name=name]").val(fullName[0]);
+                $('#user-form').find("input[name=second_name]").val(fullName[1]);
+                $('#user-form').find("input[name=patronymic]").val(fullName[2]);
+                $('#user-form').find("input[name=email]").val(row.data()['Email']);
+                $('#user-form').find("select[name=role]").val(row.data()['Role']);
+                $('#user-form').find("select[name=status]").val(row.data()['Status']);
+
             });
 
         });
