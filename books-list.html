@@ -232,16 +232,16 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Book Id</th>
+                                        <th data-searchable="false">Book Id</th>
                                         <th>Name</th>
-                                        <th>Author</th>
-                                        <th>Serial</th>
+                                        <th data-orderable="false">Author</th>
+                                        <th data-orderable="false">Serial</th>
                                         <th>Status</th>
-                                        <th>Language</th>
-                                        <th>Duration</th>
-                                        <th>Added At</th>
-                                        <th>Creator</th>
-                                        <th>Actions</th>
+                                        <th data-orderable="false">Language</th>
+                                        <th data-searchable="false">Duration</th>
+                                        <th data-searchable="false">Added At</th>
+                                        <th data-orderable="false">Creator</th>
+                                        <th data-orderable="false" data-searchable="false">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -327,11 +327,6 @@
         }
 
         let table = $('.dataTables-example').DataTable({
-
-            columnDefs: [
-                { "orderable": false, "targets": [3, 4, 6, 9, 10] },
-                { "searchable": false, "targets": [1, 2, 7, 8, 10] }
-            ],
 
             pageLength: 25,
             responsive: true,
