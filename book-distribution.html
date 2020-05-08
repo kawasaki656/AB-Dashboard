@@ -274,38 +274,42 @@
                     <div class="modal-body">
                         <form id="right-form">
                             <div class="form-group">
-                                <label class="col-form-label">Name</label>
-                                <input type="text" class="form-control" name="name">
+                                <label class="col-form-label">Book</label>
+                                <input type="text" class="form-control" name="book">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Second Name</label>
-                                <input type="text" class="form-control" name="second_name">
+                                <label class="col-form-label">Right Type</label>
+                                <input type="text" class="form-control" name="right_type">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Patronymic</label>
-                                <input type="text" class="form-control" name="patronymic">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">Email</label>
-                                <input type="email" class="form-control" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label>Role</label>
-                                <select class="form-control" name="role">
-                                    <option value="Right">Right</option>
-                                    <option value="Admin">Admin</option>
+                                <label>Independently Make</label>
+                                <select class="form-control" name="Independently_make">
+                                    <option value="yes">Да</option>
+                                    <option value="no">Нет</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="Active">Active</option>
-                                    <option value="Banned">Banned</option>
-                                </select>
+                                <label class="col-form-label">Public Domain</label>
+                                <input type="text" class="form-control" name="public_domain">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Password</label>
-                                <input type="password" class="form-control" name="password">
+                                <label class="col-form-label">Copyright Holder</label>
+                                <input type="text" class="form-control" name="copyright_holder">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Agent</label>
+                                <input type="text" class="form-control" name="agent">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Contract</label>
+                                <input type="text" class="form-control" name="contract">
+                            </div>
+                            <div class="form-group">
+                                <label>Exclusive Rights</label>
+                                <select class="form-control" name="exclusive_rights">
+                                    <option value="yes">Да</option>
+                                    <option value="no">Нет</option>
+                                </select>
                             </div>
                         </form>
                     </div>
@@ -414,14 +418,14 @@
             data.push({
                 'id': i,
                 'book': faker.commerce.productName(),
-                'right type': faker.internet.email(),
+                'right type': faker.random.words,
                 'independently make': faker.random.boolean() ? 'Да' : 'Нет',
                 'public domain': faker.internet.domainName(),
                 'copyright holder': faker.company.companyName(),
                 'agent': faker.internet.userName(),
                 'contract': faker.random.number,
                 'exclusive rights': faker.random.boolean() ? 'Да' : 'Нет',
-                'actions': actions(),
+                'actions': actions,
             });
         }
 
@@ -492,14 +496,17 @@
             }, {});
 
             let data = [{
-                'Id': row ? row.data().Id : ++lastId,
-                'Full Name': formData.name + ' ' + formData.second_name + ' ' + formData.patronymic,
-                'Email': formData.email,
-                'Role': formData.role,
-                'Added At': row ? row.data()['Added At'] : null,
-                'Last Active At And IP': row ? row.data()['Last Active At And IP'] : null,
-                'Status': formData.status,
-                'Actions': actions
+
+                'id': row ? row.data().Id : ++lastId,
+                'book': formData.book,
+                'right type': formData.right_type,
+                'independently make': formData.Independently_make == 'yes' ? 'Да' : 'Нет',
+                'public domain': formData.public_domain,
+                'copyright holder': formData.copyright_holder,
+                'agent': formData.agent,
+                'contract': formData.contract,
+                'exclusive rights': formData.exclusive_rights == 'yes' ? 'Да' : 'Нет',
+                'actions': actions
             }];
 
             if (row) {
