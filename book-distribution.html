@@ -266,7 +266,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create Right</h5>
+                        <h5 class="modal-title">Create Right</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -283,7 +283,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Independently Make</label>
-                                <select class="form-control" name="Independently_make">
+                                <select class="form-control" name="independently_make">
                                     <option value="yes">Да</option>
                                     <option value="no">Нет</option>
                                 </select>
@@ -325,7 +325,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Create Right</h5>
+                        <h5 class="modal-title">Update Right</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -333,33 +333,41 @@
                     <div class="modal-body">
                         <form id="right-form-update">
                             <div class="form-group">
-                                <label class="col-form-label">Name</label>
-                                <input type="text" class="form-control" name="name">
+                                <label class="col-form-label">Book</label>
+                                <input type="text" class="form-control" name="book">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Second Name</label>
-                                <input type="text" class="form-control" name="second_name">
+                                <label class="col-form-label">Right Type</label>
+                                <input type="text" class="form-control" name="right_type">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Patronymic</label>
-                                <input type="text" class="form-control" name="patronymic">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">Email</label>
-                                <input type="email" class="form-control" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label>Role</label>
-                                <select class="form-control" name="role">
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
+                                <label>Independently Make</label>
+                                <select class="form-control" name="independently_make">
+                                    <option value="yes">Да</option>
+                                    <option value="no">Нет</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="Active">Active</option>
-                                    <option value="Banned">Banned</option>
+                                <label class="col-form-label">Public Domain</label>
+                                <input type="text" class="form-control" name="public_domain">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Copyright Holder</label>
+                                <input type="text" class="form-control" name="copyright_holder">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Agent</label>
+                                <input type="text" class="form-control" name="agent">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Contract</label>
+                                <input type="text" class="form-control" name="contract">
+                            </div>
+                            <div class="form-group">
+                                <label>Exclusive Rights</label>
+                                <select class="form-control" name="exclusive_rights">
+                                    <option value="yes">Да</option>
+                                    <option value="no">Нет</option>
                                 </select>
                             </div>
                         </form>
@@ -418,12 +426,12 @@
             data.push({
                 'id': i,
                 'book': faker.commerce.productName(),
-                'right type': faker.random.words,
+                'right type': faker.random.words(),
                 'independently make': faker.random.boolean() ? 'Да' : 'Нет',
                 'public domain': faker.internet.domainName(),
                 'copyright holder': faker.company.companyName(),
                 'agent': faker.internet.userName(),
-                'contract': faker.random.number,
+                'contract': faker.random.number(),
                 'exclusive rights': faker.random.boolean() ? 'Да' : 'Нет',
                 'actions': actions,
             });
@@ -497,10 +505,10 @@
 
             let data = [{
 
-                'id': row ? row.data().Id : ++lastId,
+                'id': row ? row.data().id : ++lastId,
                 'book': formData.book,
                 'right type': formData.right_type,
-                'independently make': formData.Independently_make == 'yes' ? 'Да' : 'Нет',
+                'independently make': formData.independently_make == 'yes' ? 'Да' : 'Нет',
                 'public domain': formData.public_domain,
                 'copyright holder': formData.copyright_holder,
                 'agent': formData.agent,
@@ -550,15 +558,19 @@
             $('#updateRightModal').modal('show');
 
             let row = table.row($(e.target).parents('tr'));
-            let fullName = row.data()['Full Name'].split(' ');
             let updateForm = $('#right-form-update');
 
-            updateForm.find("input[name=name]").val(fullName[0]);
-            updateForm.find("input[name=second_name]").val(fullName[1]);
-            updateForm.find("input[name=patronymic]").val(fullName[2]);
-            updateForm.find("input[name=email]").val(row.data()['Email']);
-            updateForm.find("select[name=role]").val(row.data()['Role']);
-            updateForm.find("select[name=status]").val(row.data()['Status']);
+            let independentlyMake = row.data()['independently make'] == 'Да' ? 'yes' : 'no';
+            let exclusiveRights = row.data()['exclusive rights'] == 'Да' ? 'yes' : 'no';
+
+            updateForm.find("input[name=book]").val(row.data()['book']);
+            updateForm.find("input[name=right_type]").val(row.data()['right type']);
+            updateForm.find("select[name=independently_make]").val(independentlyMake);
+            updateForm.find("input[name=public_domain]").val(row.data()['public domain']);
+            updateForm.find("input[name=copyright_holder]").val(row.data()['copyright holder']);
+            updateForm.find("input[name=agent]").val(row.data()['agent']);
+            updateForm.find("input[name=contract]").val(row.data()['contract']);
+            updateForm.find("select[name=exclusive_rights]").val(exclusiveRights);
 
             currentRow = row;
         });
