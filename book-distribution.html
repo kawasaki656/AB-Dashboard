@@ -179,7 +179,7 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Rights</h2>
+                <h2>Каналы распространения</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Главная</a>
@@ -229,15 +229,12 @@
                                     <thead>
                                     <tr>
                                         <th data-searchable="false">Id</th>
-                                        <th data-sortable="false">Книга</th>
-                                        <th data-sortable="false">Вид Права</th>
-                                        <th data-sortable="false">Изготавливается самостоятельно</th>
-                                        <th data-sortable="false">Public Domain</th>
-                                        <th data-sortable="false">Правообладатель</th>
-                                        <th data-sortable="false">Агент</th>
-                                        <th data-sortable="false">Договор</th>
-                                        <th data-sortable="false">Права переданы эксклюзивно</th>
-                                        <th data-sortable="false">Действия</th>
+                                        <th data-sortable="false">Площадка</th>
+                                        <th data-searchable="false">Идентификатор Книги на Площадке</th>
+                                        <th data-searchable="false">Дата релиза</th>
+                                        <th data-sortable="false">Эксклюзивность</th>
+                                        <th data-searchable="false" data-sortable="false">URL на площадке</th>
+                                        <th data-sortable="false" data-searchable="false">Действия</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -262,24 +259,24 @@
             </div>
         </div>
 
-        <div class="modal fade" id="createRightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createChannelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Create Right</h5>
+                        <h5 class="modal-title">Create Channel</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="right-form">
+                        <form id="channel-form">
                             <div class="form-group">
                                 <label class="col-form-label">Book</label>
                                 <input type="text" class="form-control" name="book">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Right Type</label>
-                                <input type="text" class="form-control" name="right_type">
+                                <label class="col-form-label">Channel Type</label>
+                                <input type="text" class="form-control" name="channel_type">
                             </div>
                             <div class="form-group">
                                 <label>Independently Make</label>
@@ -305,8 +302,8 @@
                                 <input type="text" class="form-control" name="contract">
                             </div>
                             <div class="form-group">
-                                <label>Exclusive Rights</label>
-                                <select class="form-control" name="exclusive_rights">
+                                <label>Exclusive Channels</label>
+                                <select class="form-control" name="exclusive_channels">
                                     <option value="yes">Да</option>
                                     <option value="no">Нет</option>
                                 </select>
@@ -315,30 +312,30 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="add-right">Save</button>
+                        <button type="button" class="btn btn-primary" id="add-channel">Save</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="updateRightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="updateChannelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Update Right</h5>
+                        <h5 class="modal-title">Update Channel</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="right-form-update">
+                        <form id="channel-form-update">
                             <div class="form-group">
                                 <label class="col-form-label">Book</label>
                                 <input type="text" class="form-control" name="book">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Right Type</label>
-                                <input type="text" class="form-control" name="right_type">
+                                <label class="col-form-label">Channel Type</label>
+                                <input type="text" class="form-control" name="channel_type">
                             </div>
                             <div class="form-group">
                                 <label>Independently Make</label>
@@ -364,8 +361,8 @@
                                 <input type="text" class="form-control" name="contract">
                             </div>
                             <div class="form-group">
-                                <label>Exclusive Rights</label>
-                                <select class="form-control" name="exclusive_rights">
+                                <label>Exclusive Channels</label>
+                                <select class="form-control" name="exclusive_channels">
                                     <option value="yes">Да</option>
                                     <option value="no">Нет</option>
                                 </select>
@@ -374,7 +371,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="update-right">Save</button>
+                        <button type="button" class="btn btn-primary" id="update-Channel">Save</button>
                     </div>
                 </div>
             </div>
@@ -414,8 +411,8 @@
                                                 </a>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item right-edit" href="#">Редактировать</a>
-                                                    <a class="dropdown-item right-delete" href="#">Удалить</a>
+                                                    <a class="dropdown-item channel-edit" href="#">Редактировать</a>
+                                                    <a class="dropdown-item channel-delete" href="#">Удалить</a>
                                                 </div>
                                             </div>`;
         };
@@ -424,16 +421,14 @@
 
         for (let i = 1; i < 100; i++) {
             data.push({
+
                 'id': i,
-                'book': faker.commerce.productName(),
-                'right type': faker.random.words(),
-                'independently make': faker.random.boolean() ? 'Да' : 'Нет',
-                'public domain': faker.internet.domainName(),
-                'copyright holder': faker.company.companyName(),
-                'agent': faker.internet.userName(),
-                'contract': faker.random.number(),
-                'exclusive rights': faker.random.boolean() ? 'Да' : 'Нет',
-                'actions': actions,
+                'platform': faker.company.companyName(),
+                'id on platform': faker.random.number(),
+                'release date': faker.date.past(),
+                'exclusivity': faker.random.number(10),
+                'url on platform': faker.internet.url(),
+                'actions': actions
             });
         }
 
@@ -452,10 +447,6 @@
                     previous: 'Назад',
                 }
             },
-            columnDefs: [
-                { "orderable": false, "targets": 7 },
-                { "searchable": false, "targets": [0, 4, 5, 7] }
-            ],
 
             pageLength: 25,
             responsive: true,
@@ -465,26 +456,23 @@
                     text: 'Добавить право',
                     action: function ( e, dt, node, config ) {
                         console.log('Добавить право');
-                        $('#createRightModal').modal('toggle');
+                        $('#createChannelModal').modal('toggle');
                     }
                 },
             ],
             data: data,
             columns: [
                 {data: 'id'},
-                {data: 'book'},
-                {data: 'right type'},
-                {data: 'independently make'},
-                {data: 'public domain'},
-                {data: 'copyright holder'},
-                {data: 'agent'},
-                {data: 'contract'},
-                {data: 'exclusive rights'},
-                {data: 'actions'}
+                {data: 'platform'},
+                {data: 'id on platform'},
+                {data: 'release date'},
+                {data: 'exclusivity'},
+                {data: 'url on platform'},
+                {data: "actions"}
             ]
 
         }).on('order', function () {
-            console.log('ordering rights');
+            console.log('ordering channels');
         });
 
 
@@ -493,9 +481,9 @@
 
         function postForm(row = null)
         {
-            let form = $('#right-form');
+            let form = $('#channel-form');
             if (row) {
-                form = $('#right-form-update');
+                form = $('#channel-form-update');
             }
 
             let formData = form.serializeArray().reduce(function(obj, item) {
@@ -519,10 +507,10 @@
 
             if (row) {
                 row.data(data[0]);
-                $('#updateRightModal').modal('hide');
+                $('#updateChannelModal').modal('hide');
             } else {
                 table.rows.add(data).draw();
-                $('#createRightModal').modal('hide');
+                $('#createChannelModal').modal('hide');
             }
 
             form.find("input[type=text], input[type=email], input[type=password], textarea").val('');
@@ -538,27 +526,27 @@
         }
 
 
-        $('#add-right').on('click', (e) => {
+        $('#add-channel').on('click', (e) => {
             e.preventDefault();
 
             storeForm();
         });
 
-        $('#update-right').on('click', (e) => {
+        $('#update-channel').on('click', (e) => {
             storeForm(currentRow);
         });
 
-        table.on('click', '.right-delete', (e) => {
+        table.on('click', '.channel-delete', (e) => {
             e.preventDefault();
             table.row($(e.target).parents('tr')).remove().draw();
         });
 
-        table.on('click', '.right-edit', (e) => {
+        table.on('click', '.channel-edit', (e) => {
             e.preventDefault();
-            $('#updateRightModal').modal('show');
+            $('#updateChannelModal').modal('show');
 
             let row = table.row($(e.target).parents('tr'));
-            let updateForm = $('#right-form-update');
+            let updateForm = $('#Channel-form-update');
 
             let independentlyMake = row.data()['independently make'] == 'Да' ? 'yes' : 'no';
             let exclusiveRights = row.data()['exclusive rights'] == 'Да' ? 'yes' : 'no';
