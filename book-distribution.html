@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Права</title>
+    <title>INSPINIA | Каналы</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -188,7 +188,7 @@
                         <a href="#">Настройки</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        <strong>Права</strong>
+                        <strong>Каналы</strong>
                     </li>
                 </ol>
             </div>
@@ -203,7 +203,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Права</h5>
+                            <h5>Каналы</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -271,42 +271,24 @@
                     <div class="modal-body">
                         <form id="channel-form">
                             <div class="form-group">
-                                <label class="col-form-label">Book</label>
-                                <input type="text" class="form-control" name="book">
+                                <label class="col-form-label">Площадка</label>
+                                <input type="text" class="form-control" name="platform">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Channel Type</label>
-                                <input type="text" class="form-control" name="channel_type">
+                                <label class="col-form-label">Идентификатор Книги на Площадке</label>
+                                <input type="text" class="form-control" name="id_on_platform">
                             </div>
                             <div class="form-group">
-                                <label>Independently Make</label>
-                                <select class="form-control" name="independently_make">
-                                    <option value="yes">Да</option>
-                                    <option value="no">Нет</option>
-                                </select>
+                                <label class="col-form-label">Дата релиза</label>
+                                <input type="date" class="form-control" name="release_date">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Public Domain</label>
-                                <input type="text" class="form-control" name="public_domain">
+                                <label class="col-form-label">Эксклюзивность</label>
+                                <input type="text" class="form-control" name="exclusivity">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Copyright Holder</label>
-                                <input type="text" class="form-control" name="copyright_holder">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">Agent</label>
-                                <input type="text" class="form-control" name="agent">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">Contract</label>
-                                <input type="text" class="form-control" name="contract">
-                            </div>
-                            <div class="form-group">
-                                <label>Exclusive Channels</label>
-                                <select class="form-control" name="exclusive_channels">
-                                    <option value="yes">Да</option>
-                                    <option value="no">Нет</option>
-                                </select>
+                                <label class="col-form-label">URL на площадке</label>
+                                <input type="text" class="form-control" name="url_on_platform">
                             </div>
                         </form>
                     </div>
@@ -330,48 +312,30 @@
                     <div class="modal-body">
                         <form id="channel-form-update">
                             <div class="form-group">
-                                <label class="col-form-label">Book</label>
-                                <input type="text" class="form-control" name="book">
+                                <label class="col-form-label">Площадка</label>
+                                <input type="text" class="form-control" name="platform">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Channel Type</label>
-                                <input type="text" class="form-control" name="channel_type">
+                                <label class="col-form-label">Идентификатор Книги на Площадке</label>
+                                <input type="text" class="form-control" name="id_on_platform">
                             </div>
                             <div class="form-group">
-                                <label>Independently Make</label>
-                                <select class="form-control" name="independently_make">
-                                    <option value="yes">Да</option>
-                                    <option value="no">Нет</option>
-                                </select>
+                                <label class="col-form-label">Дата релиза</label>
+                                <input type="date" class="form-control" name="release_date">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Public Domain</label>
-                                <input type="text" class="form-control" name="public_domain">
+                                <label class="col-form-label">Эксклюзивность</label>
+                                <input type="text" class="form-control" name="exclusivity">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Copyright Holder</label>
-                                <input type="text" class="form-control" name="copyright_holder">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">Agent</label>
-                                <input type="text" class="form-control" name="agent">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">Contract</label>
-                                <input type="text" class="form-control" name="contract">
-                            </div>
-                            <div class="form-group">
-                                <label>Exclusive Channels</label>
-                                <select class="form-control" name="exclusive_channels">
-                                    <option value="yes">Да</option>
-                                    <option value="no">Нет</option>
-                                </select>
+                                <label class="col-form-label">URL на площадке</label>
+                                <input type="text" class="form-control" name="url_on_platform">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="update-Channel">Save</button>
+                        <button type="button" class="btn btn-primary" id="update-channel">Save</button>
                     </div>
                 </div>
             </div>
@@ -419,7 +383,7 @@
 
         let data = [];
 
-        for (let i = 1; i < 100; i++) {
+        for (let i = 1; i < 200; i++) {
             data.push({
 
                 'id': i,
@@ -436,10 +400,9 @@
 
             language: {
                 lengthMenu: 'Отображать <select>'+
-                    '<option value="10">10</option>'+
-                    '<option value="25">25</option>'+
                     '<option value="50">50</option>'+
                     '<option value="100">100</option>'+
+                    '<option value="200">200</option>'+
                     '</select> записей',
                 search: 'Поиск',
                 paginate: {
@@ -448,14 +411,14 @@
                 }
             },
 
-            pageLength: 25,
+            pageLength: 50,
             responsive: true,
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
                 {
-                    text: 'Добавить право',
+                    text: 'Добавить канал',
                     action: function ( e, dt, node, config ) {
-                        console.log('Добавить право');
+                        console.log('Добавить канал');
                         $('#createChannelModal').modal('toggle');
                     }
                 },
@@ -494,14 +457,11 @@
             let data = [{
 
                 'id': row ? row.data().id : ++lastId,
-                'book': formData.book,
-                'right type': formData.right_type,
-                'independently make': formData.independently_make == 'yes' ? 'Да' : 'Нет',
-                'public domain': formData.public_domain,
-                'copyright holder': formData.copyright_holder,
-                'agent': formData.agent,
-                'contract': formData.contract,
-                'exclusive rights': formData.exclusive_rights == 'yes' ? 'Да' : 'Нет',
+                'platform': formData.platform,
+                'id on platform': formData.id_on_platform,
+                'release date': formData.release_date,
+                'exclusivity': formData.exclusivity,
+                'url on platform': formData.url_on_platform,
                 'actions': actions
             }];
 
@@ -546,19 +506,18 @@
             $('#updateChannelModal').modal('show');
 
             let row = table.row($(e.target).parents('tr'));
-            let updateForm = $('#Channel-form-update');
+            let updateForm = $('#channel-form-update');
 
-            let independentlyMake = row.data()['independently make'] == 'Да' ? 'yes' : 'no';
-            let exclusiveRights = row.data()['exclusive rights'] == 'Да' ? 'yes' : 'no';
+            let date = row.data()['release date'];
+            let day = ("0" + date.getDate()).slice(-2);
+            let month = ("0" + (date.getMonth() + 1)).slice(-2);
+            let releaseDate = date.getFullYear() + '-' + (month) + '-' + (day);
 
-            updateForm.find("input[name=book]").val(row.data()['book']);
-            updateForm.find("input[name=right_type]").val(row.data()['right type']);
-            updateForm.find("select[name=independently_make]").val(independentlyMake);
-            updateForm.find("input[name=public_domain]").val(row.data()['public domain']);
-            updateForm.find("input[name=copyright_holder]").val(row.data()['copyright holder']);
-            updateForm.find("input[name=agent]").val(row.data()['agent']);
-            updateForm.find("input[name=contract]").val(row.data()['contract']);
-            updateForm.find("select[name=exclusive_rights]").val(exclusiveRights);
+            updateForm.find("input[name=platform]").val(row.data()['platform']);
+            updateForm.find("input[name=id_on_platform]").val(row.data()['id on platform']);
+            updateForm.find("input[name=release_date]").val(releaseDate);
+            updateForm.find("input[name=exclusivity]").val(row.data()['exclusivity']);
+            updateForm.find("input[name=url_on_platform]").val(row.data()['url on platform']);
 
             currentRow = row;
         });
