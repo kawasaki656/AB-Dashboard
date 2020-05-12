@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Books</title>
+    <title>INSPINIA | Книги</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                             <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
                             <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                            <li><a class="dropdown-item" href="login.html">Выход</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -45,13 +45,13 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Options</span> <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Настройки</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="users-list.html">Users</a></li>
+                        <li><a href="users-list.html">Пользователи</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="books-list.html"><i class="fa fa-book"></i> <span class="nav-label">Books</span></a>
+                    <a href="books-list.html"><i class="fa fa-book"></i> <span class="nav-label">Книги</span></a>
                 </li>
             </ul>
 
@@ -65,14 +65,11 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="Введите текст для поиска..." class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -172,7 +169,7 @@
 
                     <li>
                         <a href="login.html">
-                            <i class="fa fa-sign-out"></i> Log out
+                            <i class="fa fa-sign-out"></i> Выход
                         </a>
                     </li>
                 </ul>
@@ -182,16 +179,16 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Books</h2>
+                <h2>Книги</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="index.html">Home</a>
+                        <a href="index.html">Главная</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">Options</a>
+                        <a href="#">Настройки</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        <strong>Books</strong>
+                        <strong>Книги</strong>
                     </li>
                 </ol>
             </div>
@@ -206,7 +203,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Books</h5>
+                            <h5>Книги</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -296,12 +293,12 @@
         let actions = function() {
             return `<div class="dropdown show">
                                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Actions
+                                                    Действия
                                                 </a>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item book-edit" href="#">Edit</a>
-                                                    <a class="dropdown-item book-delete" href="#">Delete</a>
+                                                    <a class="dropdown-item book-edit" href="#">Редактировать</a>
+                                                    <a class="dropdown-item book-delete" href="#">Удалить</a>
                                                 </div>
                                             </div>`;
         };
@@ -327,13 +324,24 @@
         }
 
         let table = $('.dataTables-example').DataTable({
-
+            language: {
+                lengthMenu: 'Отображать <select>'+
+                    '<option value="50">50</option>'+
+                    '<option value="100">100</option>'+
+                    '<option value="200">200</option>'+
+                    '</select> записей',
+                search: 'Поиск',
+                paginate: {
+                    next: 'Далее',
+                    previous: 'Назад',
+                }
+            },
             pageLength: 25,
             responsive: true,
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
                 {
-                    text: 'Create Book',
+                    text: 'Добавить книгу',
                     action: function ( e, dt, node, config ) {
                         console.log('creating book');
                         window.location.href = "book.html";
